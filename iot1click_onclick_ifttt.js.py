@@ -1,9 +1,10 @@
+# for AWS Lambda Python 3.6
 # coding: utf-8
 ################################################################################
-# SORACOM LTE-Button ‚â AWS IoT Button‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚ÉIFTTT ‚ÖƒgƒŠƒK‚ğ‘—M‚·‚é
+# SORACOM LTE-Button ã‚„ AWS IoT ButtonãŒæŠ¼ã•ã‚ŒãŸã¨ãã«IFTTT ã¸ãƒˆãƒªã‚¬ã‚’é€ä¿¡ã™ã‚‹
 #
-# €”õF
-# IFTTT‚ÌKey‚ğ(https://ifttt.com/maker_webhooks)‚Åæ“¾‚µA•Ï”ifttt_token‚Ö‘ã“ü
+# æº–å‚™ï¼š
+# IFTTTã®Webhocks(https://ifttt.com/maker_webhooks)ã§Tokenå–å¾—ã—ã€ifttt_tokenã¸
 #
 #                                          Copyright (c) 2018-2019 Wataru KUNINO
 ################################################################################
@@ -12,9 +13,9 @@ import json
 import urllib.request
 import datetime
 
-ifttt_token='IFTTT‚ÌWebhocks‚Åæ“¾‚µ‚½Token‚ğ‹L“ü‚·‚é'
+ifttt_token='0123456-012345678ABCDEFGHIJKLMNOPQRSTUVWXYZ'   # ã“ã“ã«Tokenã‚’è¨˜å…¥
 ifttt_event='notify'
-msg='ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½'
+msg='ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ'
 
 def lambda_handler(event, context):
     print('Received event: ' + json.dumps(event))
@@ -25,10 +26,10 @@ def lambda_handler(event, context):
     date += datetime.timedelta(hours=9)
     url  = 'https://maker.ifttt.com/trigger/'+ifttt_event+'/with/key/'+ifttt_token
     head = {"Content-Type":"application/json"}
-    body = {"value1":'{}({}, {}, {})'.format(msg,date.strftime('%Y/%m/%d %H:%M'),dsn,btn)}
+    body = {"value1":'{}({}, {}, {})'.format(msg,date.strftime('%Y/%m/%d %H:%M'),dsn[-4:],btn)}
     print(body)
     post = urllib.request.Request(url, json.dumps(body).encode(), head)
-    result = urllib.request.urlopen(post)
-    if result:
-        print('Result:', result.read())
+    res  = urllib.request.urlopen(post)
+    if res:
+        print('Response:', res.read())
         return 'Done'

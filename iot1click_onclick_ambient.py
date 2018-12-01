@@ -1,18 +1,19 @@
+# for AWS Lambda Python 3.6
 # coding: utf-8
 ################################################################################
-# SORACOM LTE-Button �� AWS IoT Button�������ꂽ�Ƃ���IFTTT �փg���K�𑗐M����
+# SORACOM LTE-Button や AWS IoT Buttonが押された時にAmbient へボタン値を送信する
 #
-# �����F
-# IFTTT��Key��(https://ifttt.com/maker_webhooks)�Ŏ擾���A�ϐ�ifttt_token�֑��
+# 準備：
+# AmbientのKeyを(https://ambidata.io)で取得し、ambient_chidとambient_wkeyへ代入
 #
 #                                          Copyright (c) 2018-2019 Wataru KUNINO
 ################################################################################
 
 import json
 import urllib.request
-ambient_chid='725'
-ambient_wkey='ad3e53b54fe16764'
-amdient_tag='d5'
+ambient_chid='725'                  # ここにAmbientで取得したチャネルIDを入力
+ambient_wkey='26ee8c088f61194d'     # リードキーを入力 ※ライトキーではない
+amdient_tag='d3'                    # データ番号d1～d8のいずれかを入力
 
 def lambda_handler(event, context):
     print('Received event: ' + json.dumps(event))
@@ -24,14 +25,14 @@ def lambda_handler(event, context):
     elif btn == 'DOUBLE':
         num=2
     elif btn == 'LONG':
-        num=3
+        num=0
     print('btn=',num)
     url  = 'https://ambidata.io/api/v2/channels/'+ambient_chid+'/data'
     head = {"Content-Type":"application/json"}
     body = {"writeKey":ambient_wkey, amdient_tag:num}
     print(body)
     post = urllib.request.Request(url, json.dumps(body).encode(), head)
-    result = urllib.request.urlopen(post)
-    if result:
-        print('Result:', result.read())
+    res  = urllib.request.urlopen(post)
+    if res:
+        print('Response:', res.read())
         return 'Done'
