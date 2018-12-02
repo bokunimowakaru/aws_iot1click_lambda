@@ -1,22 +1,41 @@
-# Apple Pi �̎g����
+# Apple Pi の使い方
 
-## �X�e�b�v1
+![Apple Pi 接続例](ApplePi.jpg)
 
-* Raspberry Pi�̐ݒ�c�[�����N������
+## ステップ1
+
+* Raspberry Piの設定ツールを起動する
 	sudo raspi-config
-* I2C�̗L���� [5]��[P5]
+* I2Cの有効化 [5]→[P5]
 
-## �X�e�b�v2
+## ステップ2
 
-* i2c-tools���C���X�g�[������i�s�v�����j
+* i2c-toolsをインストールする（不要かも）
 	sudo apt-get install i2c-tools
 
-## �X�e�b�v3
+## ステップ3
+
+* CQ出版社のサイトからApplePi専用ライブラリをダウンロードして展開する
 
 	wget https://toragi.cqpub.co.jp/Portals/0/support/2016/201608ApplePi/ApplePi.tar
 	tar xvf ApplePi.tar
 
-## �Q�l����
-* �g���Z2016�N8���� P.129
-* �r�b�g���[�h����  
+* 必要ファイルとフォルダ（ディレクトリ）構成は以下のようになる
+
+	aws_iot1click_lambda
+	├── ApplePi
+	│   ├── display_ambient.py
+	│   └── ApplePi
+	│        ├── initLCD.py
+	│        ├── locateLCD.py
+	│        ├── offLED1.py
+	│        ├── offLED2.py
+	│        ├── onLED1.py
+	│        ├── onLED2.py
+	│        └── printLCD.py
+	└── display_ambient.py (ApplePi 不要)
+
+## 参考文献
+* トラ技2016年8月号 P.129
+* ビットレードワン  
 http://bit-trade-one.co.jp/product/module/adcq1608p/
