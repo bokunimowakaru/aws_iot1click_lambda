@@ -22,18 +22,18 @@
 
 * 必要ファイルとフォルダ（ディレクトリ）構成は以下のようになる
 
-	aws_iot1click_lambda
-	├── ApplePi
-	│   ├── display_ambient.py
-	│   └── ApplePi
-	│        ├── initLCD.py
-	│        ├── locateLCD.py
-	│        ├── offLED1.py
-	│        ├── offLED2.py
-	│        ├── onLED1.py
-	│        ├── onLED2.py
-	│        └── printLCD.py
-	└── display_ambient.py (ApplePi 不要)
+	aws_iot1click_lambda  
+	├── ApplePi  
+	│   ├── display_ambient.py  
+	│   └── ApplePi  
+	│        ├── initLCD.py  
+	│        ├── locateLCD.py  
+	│        ├── offLED1.py  
+	│        ├── offLED2.py  
+	│        ├── onLED1.py  
+	│        ├── onLED2.py  
+	│        └── printLCD.py  
+	└── display_ambient.py (ApplePi 不要)  
 
 ## 参考文献
 * トラ技2016年8月号 P.129
