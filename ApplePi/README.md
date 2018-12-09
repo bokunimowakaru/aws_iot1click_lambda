@@ -14,12 +14,15 @@ aws_iot1click_lambda を ビットレードワン製 ApplePiと連携させま�
 ## ステップ1
 
 * Raspberry Piの設定ツールを起動する
+
     sudo raspi-config
+
 * I2Cの有効化 [5]→[P5]→有効化
 
 ## ステップ2
 
 i2c-toolsをインストールする（不要かも）
+
     sudo apt-get install i2c-tools
 
 ## ステップ3
