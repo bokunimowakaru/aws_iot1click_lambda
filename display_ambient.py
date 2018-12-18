@@ -15,9 +15,9 @@ import urllib.request
 import datetime
 from time import sleep
 
-ambient_chid='725'                  # ここにAmbientで取得したチャネルIDを入力
-ambient_rkey='ad3e53b54fe16764'     # リードキーを入力 ※ライトキーではない
-amdient_tag='d3'                    # データ番号d1～d8のいずれかを入力
+ambient_chid='0000'                 # ここにAmbientで取得したチャネルIDを入力
+ambient_rkey='0123456789abcdef'     # リードキーを入力 ※ライトキーではない
+amdient_tag='d1'                    # データ番号d1～d8のいずれかを入力
 
 while True:
     url  = 'https://ambidata.io/api/v2/channels/'+ambient_chid+'/data\?readKey='+ambient_rkey+'\&n=1'
