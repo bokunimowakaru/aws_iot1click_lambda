@@ -1,9 +1,11 @@
+# for AWS Lambda Python 3.6
 # coding: utf-8
 ################################################################################
-# SORACOM LTE-Button ‚â AWS IoT Button‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚ÉIFTTT ‚ÖƒgƒŠƒK‚ğ‘—M‚·‚é
+# SORACOM LTE-Button ã‚„ AWS IoT ButtonãŒæŠ¼ã•ã‚ŒãŸã¨ãã«IFTTT ã¸ãƒˆãƒªã‚¬ã‚’é€ä¿¡ã™ã‚‹
 #
-# €”õF
-# IFTTT‚ÌKey‚ğ(https://ifttt.com/maker_webhooks)‚Åæ“¾‚µA•Ï”ifttt_token‚Ö‘ã“ü
+# æº–å‚™ï¼š
+# ãƒ»IoT 1-Clickã®ãƒ‡ãƒã‚¤ã‚¹ç™»éŒ²ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆä½œæˆï¼ˆãƒ­ãƒ¼ãƒ«è¨­å®šã€Lambdaé–¢æ•°è¨­å®šï¼‰
+# ãƒ»IFTTTã®Webhocks(https://ifttt.com/maker_webhooks)ã®Tokenã‚’ifttt_tokenã¸å…¥åŠ›
 #
 #                                          Copyright (c) 2018-2019 Wataru KUNINO
 ################################################################################
@@ -12,23 +14,26 @@ import json
 import urllib.request
 import datetime
 
-ifttt_token='IFTTT‚ÌWebhocks‚Åæ“¾‚µ‚½Token‚ğ‹L“ü‚·‚é'
-ifttt_event='notify'
-msg='ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½'
+ifttt_token='0123456-012345678ABCDEFGHIJKLMNOPQRSTUVWXYZ'   # ã“ã“ã«Tokenã‚’è¨˜å…¥
+ifttt_event='notify'                                        # ã‚¤ãƒ™ãƒ³ãƒˆåã‚’è¨˜å…¥
+msg='ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ'
 
 def lambda_handler(event, context):
+    # AWS IoT 1-Clickã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒã‚¤ã‚¹IDã¨ã‚¯ãƒªãƒƒã‚¯æ–¹æ³•ãªã©ã‚’å¤‰æ•°ã¸ä»£å…¥
     print('Received event: ' + json.dumps(event))
     dsn  = event['deviceInfo']['deviceId']
     btn  = event['deviceEvent']['buttonClicked']['clickType']
     date = event['deviceEvent']['buttonClicked']['reportedTime']
     date = datetime.datetime.strptime(date,"%Y-%m-%dT%H:%M:%S.%fZ")
     date += datetime.timedelta(hours=9)
+    
+    # IFTTTã¸é€ä¿¡
     url  = 'https://maker.ifttt.com/trigger/'+ifttt_event+'/with/key/'+ifttt_token
     head = {"Content-Type":"application/json"}
-    body = {"value1":'{}({}, {}, {})'.format(msg,date.strftime('%Y/%m/%d %H:%M'),dsn,btn)}
+    body = {"value1":'{}({}, {}, {})'.format(msg,date.strftime('%Y/%m/%d %H:%M'),dsn[-4:],btn)}
     print(body)
     post = urllib.request.Request(url, json.dumps(body).encode(), head)
-    result = urllib.request.urlopen(post)
-    if result:
-        print('Result:', result.read())
+    res  = urllib.request.urlopen(post)
+    if res:
+        print('Response:', res.read())
         return 'Done'

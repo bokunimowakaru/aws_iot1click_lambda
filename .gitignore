@@ -34,3 +34,6 @@
 
 *.log
 *.csv
+
+ApplePi/ApplePi/*
+ApplePi.tar
