@@ -20,7 +20,7 @@ ambient_rkey='0123456789abcdef'     # リードキーを入力 ※ライトキ�
 amdient_tag='d1'                    # データ番号d1～d8のいずれかを入力
 
 while True:
-    url  = 'https://ambidata.io/api/v2/channels/'+ambient_chid+'/data\?readKey='+ambient_rkey+'\&n=1'
+    url  = 'https://ambidata.io/api/v2/channels/'+ambient_chid+'/data\?readKey='+ambient_rkey+'&n=1'
     post = urllib.request.Request(url)
     res  = urllib.request.urlopen(post)
     if res:
