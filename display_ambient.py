@@ -1,4 +1,4 @@
-#!/usr/bin/python3.5
+#!/usr/bin/python3
 # coding: utf-8
 ################################################################################
 # Rapberry Pi用 サンプルスクリプト：Apple PiのLCDとLEDへAmbientの状態を表示する
